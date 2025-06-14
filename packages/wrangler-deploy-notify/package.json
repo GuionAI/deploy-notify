@@ -1,12 +1,12 @@
 {
   "name": "wrangler-deploy-notify",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Deploy to Cloudflare Workers with automatic deployment notifications",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "bin": {
-    "wrangler-deploy-notify": "./dist/cli.js",
-    "wdn": "./dist/cli.js"
+    "wrangler-deploy-notify": "dist/cli.js",
+    "wdn": "dist/cli.js"
   },
   "scripts": {
     "build": "tsc",
@@ -24,17 +24,17 @@
     "ci-cd",
     "automation"
   ],
-  "author": "",
+  "author": "GuionAI",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/yourusername/deploy-notify.git",
+    "url": "git+https://github.com/GuionAI/deploy-notify.git",
     "directory": "packages/wrangler-deploy-notify"
   },
   "bugs": {
-    "url": "https://github.com/yourusername/deploy-notify/issues"
+    "url": "https://github.com/GuionAI/deploy-notify/issues"
   },
-  "homepage": "https://github.com/yourusername/deploy-notify/tree/main/packages/wrangler-deploy-notify#readme",
+  "homepage": "https://github.com/GuionAI/deploy-notify/tree/main/packages/wrangler-deploy-notify#readme",
   "dependencies": {},
   "devDependencies": {
     "@types/node": "^20.0.0",
