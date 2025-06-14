@@ -9,39 +9,35 @@
 	"compatibility_date": "2025-06-14",
 	"observability": {
 		"enabled": true
-	}
+	},
 	/**
-	 * Smart Placement
-	 * Docs: https://developers.cloudflare.com/workers/configuration/smart-placement/#smart-placement
+	 * KV Namespace binding for storing deployment state
 	 */
-	// "placement": { "mode": "smart" },
-
-	/**
-	 * Bindings
-	 * Bindings allow your Worker to interact with resources on the Cloudflare Developer Platform, including
-	 * databases, object storage, AI inference, real-time communication and more.
-	 * https://developers.cloudflare.com/workers/runtime-apis/bindings/
-	 */
-
+	"kv_namespaces": [
+		{
+			"binding": "DEPLOYMENT_STATE",
+			"id": "d6e133fb80284b25a5a3911b677cc2cc"
+		}
+	],
 	/**
 	 * Environment Variables
-	 * https://developers.cloudflare.com/workers/wrangler/configuration/#environment-variables
+	 * Note: Sensitive values should be set as secrets using:
+	 * wrangler secret put DEPLOY_NOTIFY_TOKEN
+	 * wrangler secret put TELEGRAM_BOT_TOKEN
+	 * wrangler secret put TELEGRAM_CHAT_ID
 	 */
-	// "vars": { "MY_VARIABLE": "production_value" },
+	"vars": {
+		// Optional: Comma-separated list of specific projects to monitor
+		// "WORKER_PROJECTS": "worker1,worker2",
+		// "PAGE_PROJECTS": "page1,page2"
+	}
 	/**
 	 * Note: Use secrets to store sensitive data.
 	 * https://developers.cloudflare.com/workers/configuration/secrets/
+	 *
+	 * Required secrets:
+	 * - DEPLOY_NOTIFY_TOKEN: Authentication token for incoming notifications
+	 * - TELEGRAM_BOT_TOKEN: Your Telegram bot token from BotFather
+	 * - TELEGRAM_CHAT_ID: The Telegram chat ID to send notifications to
 	 */
-
-	/**
-	 * Static Assets
-	 * https://developers.cloudflare.com/workers/static-assets/binding/
-	 */
-	// "assets": { "directory": "./public/", "binding": "ASSETS" },
-
-	/**
-	 * Service Bindings (communicate between multiple Workers)
-	 * https://developers.cloudflare.com/workers/wrangler/configuration/#service-bindings
-	 */
-	// "services": [{ "binding": "MY_SERVICE", "service": "my-service" }]
 }

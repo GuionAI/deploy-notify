@@ -1,0 +1,21 @@
+{
+  "name": "my-worker-project",
+  "version": "1.2.3",
+  "scripts": {
+    "build": "esbuild src/index.js --bundle --outfile=dist/index.js",
+    
+    "deploy": "wrangler-deploy-notify",
+    "deploy:staging": "wrangler-deploy-notify --env staging",
+    "deploy:production": "wrangler-deploy-notify --env production --tag v$npm_package_version",
+    
+    "deploy:dry": "wrangler-deploy-notify --dry-run",
+    "deploy:no-notify": "wrangler-deploy-notify --skip-notification",
+    
+    "deploy:custom": "node deploy-custom.js"
+  },
+  "devDependencies": {
+    "wrangler": "^3.0.0",
+    "wrangler-deploy-notify": "^1.0.0",
+    "esbuild": "^0.19.0"
+  }
+}
