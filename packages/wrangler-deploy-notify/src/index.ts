@@ -11,12 +11,6 @@ export async function deployWithNotification(config: DeployConfig = {}): Promise
   const notifyToken = config.notifyToken || process.env.DEPLOY_NOTIFY_TOKEN;
   const skipNotification = config.skipNotification;
   
-  if (config.verbose) {
-    console.log('Debug: Config:', JSON.stringify(config, null, 2));
-    console.log('Debug: Notify URL:', notifyUrl || 'not set');
-    console.log('Debug: Notify Token:', notifyToken ? '***' + notifyToken.slice(-4) : 'not set');
-  }
-  
   // Get git information
   const gitInfo = getGitInfo();
   const projectName = config.projectName || getProjectName();
@@ -44,9 +38,11 @@ export async function deployWithNotification(config: DeployConfig = {}): Promise
     if (skipNotification) {
       console.log('ℹ️  Deployment notification skipped (--skip-notification flag)');
     } else if (!notifyUrl || !notifyToken) {
-      console.log('ℹ️  Deployment notification skipped (no URL or token configured)');
       if (config.verbose) {
-        console.log('   Missing:', !notifyUrl ? 'DEPLOY_NOTIFY_URL' : '', !notifyToken ? 'DEPLOY_NOTIFY_TOKEN' : '');
+        console.log('ℹ️  Deployment notification skipped (missing:', 
+          !notifyUrl ? 'DEPLOY_NOTIFY_URL' : '', 
+          !notifyToken ? 'DEPLOY_NOTIFY_TOKEN' : '',
+          ')');
       }
     } else {
       console.log('📤 Sending deployment notification...');

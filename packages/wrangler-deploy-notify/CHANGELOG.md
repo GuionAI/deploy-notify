@@ -1,5 +1,15 @@
 # Changelog
 
+## [1.0.2] - 2025-01-15
+
+### Changed
+- Removed debug console logs for cleaner output
+- Only show "notification skipped" message when verbose flag is used
+
+### Added
+- Publishing scripts for easier npm releases
+- PUBLISH.md guide for maintainers
+
 ## [1.0.1] - 2025-01-15
 
 ### Fixed
