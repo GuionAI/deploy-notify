@@ -3,16 +3,10 @@ import { StateService } from './services/state';
 import { MessageFormatter } from './utils/formatter';
 import { DeploymentNotification, PushDeploymentPayload } from './types';
 
-export interface Env {
-	// KV Namespace binding
-	DEPLOYMENT_STATE: KVNamespace;
-
+export interface Env extends Cloudflare.Env {
 	// Environment variables
 	TELEGRAM_BOT_TOKEN: string;
 	TELEGRAM_CHAT_ID: string;
-
-	// Notification auth token
-	DEPLOY_NOTIFY_TOKEN: string;
 
 	// Optional: specific projects to monitor (comma-separated)
 	WORKER_PROJECTS?: string;
@@ -82,8 +76,9 @@ export default {
 		if (url.pathname === '/notify' && request.method === 'POST') {
 			// Verify authorization
 			const authHeader = request.headers.get('Authorization');
+			const deployNotifyToken = await env.DEPLOY_NOTIFY_TOKEN.get();
 			
-			if (!authHeader || authHeader !== `Bearer ${env.DEPLOY_NOTIFY_TOKEN}`) {
+			if (!authHeader || authHeader !== `Bearer ${deployNotifyToken}`) {
 				return new Response('Unauthorized', { status: 401 });
 			}
 
